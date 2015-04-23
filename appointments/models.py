@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, time
 from django.utils import timezone
 from django.db import models
 
@@ -23,7 +23,8 @@ class Appointment(models.Model):
 
 
 class TimeManager:
-    time_ = set([("%s:00:00" % i, "%s:00" % i) for i in range(9, 18)])
+    # todo: write here for 09
+    time_ = set([(str(time(i)), (str(time(i)))[:-3]) for i in range(9, 18)])
     year_ = [str(timezone.now().year)]
 
     @staticmethod
@@ -37,5 +38,11 @@ class TimeManager:
         not_free_set = set([(str(appointment.time), str(appointment.time)[:-3])
                             for appointment in doctor.appointment_set.all()
                             if day_ == appointment.day])
+
+        print("-----------")
+        print(TimeManager.time_)
+        print("-------------")
+        print(not_free_set)
+        print("-------------")
 
         return TimeManager.time_ - not_free_set

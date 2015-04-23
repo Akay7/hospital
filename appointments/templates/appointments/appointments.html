@@ -57,6 +57,7 @@ var update = function() {
         data: {doctor_id: selected_doctor,
                day: selected_date}
     }).done( function(free_time) {
+        console.log(free_time);
         add_to_time_select(free_time);
     }).fail( function() {
         console.log('Fail');
