@@ -1,3 +1,4 @@
+from datetime import date
 from django.utils import timezone
 from django.db import models
 
@@ -30,6 +31,6 @@ class TimeManager:
         doctor = Doctor.objects.get(id=doctor_id)
         not_free_set = set([(str(appointment.time), str(appointment.time)[:-3])
                             for appointment in doctor.appointment_set.all()
-                            if day == str(appointment.day)])
+                            if date(*list(map(int, day.split('-')))) == appointment.day])
 
         return TimeManager.time_ - not_free_set

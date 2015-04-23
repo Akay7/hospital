@@ -28,6 +28,8 @@ class TestFormAppointment(TestCase):
         form2 = AppointmentForm(data2)
         self.assertEqual(form2.is_valid(), True)
 
+    # todo: Write test and functionality for hollidays
+
 
 class TestGetFreeTime(TestCase):
     def setUp(self):
@@ -43,6 +45,14 @@ class TestGetFreeTime(TestCase):
 
     def test_timemanager_returning_only_free_time(self):
         free_time = TimeManager.get_free_time(self.doctor.id, "2015-10-11")
+
+        self.assertIn(("11:00:00", "11:00"), free_time)
+
+        self.assertNotIn(("10:00:00", "10:00"), free_time)
+
+    def test_timemanager_returning_only_free_time_for_first_day(self):
+        Appointment.objects.create(doctor=self.doctor, day="2015-01-01", time="10:00:00", patient="Lamar")
+        free_time = TimeManager.get_free_time(self.doctor.id, "2015-1-1")
 
         self.assertIn(("11:00:00", "11:00"), free_time)
 
