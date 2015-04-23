@@ -43,6 +43,9 @@ $.ajaxSetup({
 $("#id_doctor, #id_day_month, #id_day_day, #id_day_year").on("change", function() {
     update();
 });
+$(document).ready(function() {
+    update();
+});
 
 var update = function() {
     var selected_doctor = $("#id_doctor").val();
