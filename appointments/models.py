@@ -31,8 +31,6 @@ class TimeManager:
         doctor = Doctor.objects.get(id=doctor_id)
         day_ = date(*list(map(int, day.split('-'))))
 
-        if day_.day == 25:
-            print(day_.weekday())
         if day_.weekday() in [5, 6]:
             return []
 

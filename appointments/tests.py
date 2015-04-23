@@ -37,7 +37,7 @@ class TestGetFreeTime(TestCase):
         self.doctor.save()
 
     def test_returning_all_free_time_for_selected_day(self):
-        response = self.client.post('/1/get_free_time', {"day": "2015-10-14", "doctor_id": self.doctor.id})
+        response = self.client.post('/get_free_time', {"day": "2015-10-14", "doctor_id": self.doctor.id})
         self.assertNotIn(b'"10:00:00": "10:00"', response.content)
         self.assertIn(b'"11:00:00": "11:00"', response.content)
 
