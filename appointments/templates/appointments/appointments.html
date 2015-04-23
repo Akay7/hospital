@@ -1,8 +1,20 @@
+{% load staticfiles %}
 <html>
 <head>
     <title>Appointments</title>
 </head>
-
-{{ form.as_p }}
-
-</html>
+<form action="{% url 'appointments:registration' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="OK">
+</form>
+<script src="{% static 'jquery.min.js' %}"></script>
+<script>
+    $("#id_doctor, #id_day_month, #id_day_day, #id_day_year").on("change", function() {
+        var selected_doctor = $("#id_doctor").val();
+        var selected_date = $("#id_day_year").val() + "-" + $("#id_day_month").val() + "-" + $("#id_day_day").val();
+        console.log(selected_date);
+        console.log(selected_doctor);
+    });
+</script>
+</htm>

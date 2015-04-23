@@ -1,17 +1,12 @@
-from datetime import datetime
-from django.utils import timezone
 from django import forms
 from django.forms.extras import widgets
-from .models import Doctor, Appointments
-
-time_ = [(i, "%s:00" % i) for i in range(9, 18)]
-year_ = [str(timezone.now().year)]
+from .models import Appointment, TimeManager
 
 
-class AppointmentsForm(forms.ModelForm):
-    day = forms.DateField(widget=widgets.SelectDateWidget(years=year_))
-    time = forms.TimeField(widget=widgets.Select(choices=time_))
+class AppointmentForm(forms.ModelForm):
+    day = forms.DateField(widget=widgets.SelectDateWidget(years=TimeManager.year_))
+    time = forms.TimeField(widget=widgets.Select(choices=TimeManager.time_))
 
     class Meta:
-        model = Appointments
+        model = Appointment
         fields = ['doctor', 'day', 'time', 'patient']
