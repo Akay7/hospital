@@ -19,7 +19,6 @@ class GetFreeTimeView(generic.View):
     def post(self, request):
         doctor_id = request.POST.get("doctor_id")
         day = request.POST.get('day')
-        #print(day)
         answer = dict(TimeManager.get_free_time(doctor_id, day))
 
         return JsonResponse(answer)

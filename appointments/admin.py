@@ -8,10 +8,10 @@ class AppointmentAdmin(admin.ModelAdmin):
 #admin.site.register(Appointment, AppointmentAdmin)
 
 
-class AppointmentStackedAdmin(admin.StackedInline):
+class AppointmentStackedAdmin(admin.TabularInline):
     model = Appointment
     fields = ['day', 'time', 'patient', ]
-    #readonly_fields = ['day', 'time', 'patient', ]
+    readonly_fields = ['day', 'time', 'patient', ]
     extra = 0
 
 

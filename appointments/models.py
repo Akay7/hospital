@@ -29,8 +29,15 @@ class TimeManager:
     @staticmethod
     def get_free_time(doctor_id, day):
         doctor = Doctor.objects.get(id=doctor_id)
+        day_ = date(*list(map(int, day.split('-'))))
+
+        if day_.day == 25:
+            print(day_.weekday())
+        if day_.weekday() in [5, 6]:
+            return []
+
         not_free_set = set([(str(appointment.time), str(appointment.time)[:-3])
                             for appointment in doctor.appointment_set.all()
-                            if date(*list(map(int, day.split('-')))) == appointment.day])
+                            if day_ == appointment.day])
 
         return TimeManager.time_ - not_free_set
